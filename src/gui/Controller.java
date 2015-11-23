@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.ArrayList;
-
 import data.GameBoard;
 import data.Snake;
 import enums.TileState;
