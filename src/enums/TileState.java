@@ -8,3 +8,5 @@ public enum TileState {
 	BORDER, 
 	OBSTACLE
 }
+
+/* Maybe associate colors with each possible state in this class? */

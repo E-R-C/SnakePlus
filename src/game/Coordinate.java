@@ -1,8 +1,6 @@
 package game;
 
 
-
-
 public class Coordinate {
 	private int column;
 	private int row;
@@ -15,4 +13,5 @@ public class Coordinate {
 	public int getColumn(){return column;}
 	public int getRow(){return row;}
 
+	
 }
