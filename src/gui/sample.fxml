@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+<BorderPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
    <center>
       <GridPane fx:id="grid" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -60,7 +60,7 @@
       <AnchorPane prefHeight="125.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
             <Button layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Quit Game" />
-            <Button layoutX="300.0" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="New Game" />
+            <Button layoutX="300.0" layoutY="31.0" mnemonicParsing="false" onAction="#start" prefHeight="30.0" prefWidth="150.0" text="New Game" />
          </children></AnchorPane>
    </bottom>
    <top>
@@ -73,9 +73,8 @@
       <AnchorPane prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="43.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" />
-            <TextField layoutX="13.0" layoutY="49.0" prefHeight="30.0" prefWidth="100.0" />
-            <TextField layoutX="13.0" layoutY="199.0" prefHeight="30.0" prefWidth="100.0" />
             <Text layoutX="44.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level:" />
+            <Text fx:id="scoreText" layoutX="94.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
          </children></AnchorPane>
    </right>
 </BorderPane>

@@ -11,15 +11,19 @@ import javafx.collections.ObservableList;
 
 public class Snake {
 	private int size = 2;
-	private Tuple head = new Tuple(3, 16);
+	private Tuple head = new Tuple(3, 3);
 	private ArrayDeque<Tuple> body = new ArrayDeque<Tuple>();
-	private Direction direction = Direction.UP; 
+	private Direction direction = Direction.DOWN; 
+	private boolean eaten;
 	
-	public Snake() {
-		body.add(head); 
-		for (int i = size - 1; i >= 0; i--) {
-			body.add(new Tuple(head.getX(), head.getY() + i));
+	public Snake() { 
+		for (int i = size - 1; i > 0; i--) {
+			body.add(new Tuple(head.getX(), head.getY() - i));
 		}
+	}
+	
+	public Direction getDirection() {
+		return direction;
 	}
 	
 	public void changeDirection(Direction dir) {
@@ -27,7 +31,14 @@ public class Snake {
 	}
 	
 	public void move() {
-		body.remove();
+		if (!eaten) {
+			body.remove();
+		}
+		else {
+			eaten = false;
+		}
+		
+		body.add(head);
 		
 		if (direction == Direction.UP) {
 			head = new Tuple(head.getX(), head.getY() - 1);
@@ -39,9 +50,9 @@ public class Snake {
 			head = new Tuple(head.getX() - 1, head.getY());
 		}
 		if (direction == Direction.RIGHT) {
-			head = new Tuple(head.getX() + 1, head.getY() - 1);
+			head = new Tuple(head.getX() + 1, head.getY());
 		}
-		body.add(head);
+
 	}
 	
 	public Tuple getHead() {
@@ -50,6 +61,14 @@ public class Snake {
 	
 	public ArrayDeque<Tuple> getBody() {
 		return body;
+	}
+	
+	public void eat() {
+		eaten = true;
+	}
+	
+	public boolean hasEaten() {
+		return eaten;
 	}
 	
 }

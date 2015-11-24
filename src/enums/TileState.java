@@ -6,7 +6,8 @@ public enum TileState {
 	SNAKE_HEAD,
 	FOOD,
 	BORDER, 
-	OBSTACLE
+	OBSTACLE,
+	GAME_OVER
 }
 
 /* Maybe associate colors with each possible state in this class? */

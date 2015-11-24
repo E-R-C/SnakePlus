@@ -2,43 +2,156 @@ package gui;
 
 import data.GameBoard;
 import data.Snake;
+import enums.Direction;
 import enums.TileState;
+import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 
 public class Controller {
 	
+	@FXML 
+	private BorderPane canvas;
+	
 	@FXML
 	private GridPane grid;
+	
+	@FXML
+	private Text scoreText;
 	
 	private ObservableList<TileState> tiles = FXCollections.observableArrayList();
 	private GameBoard board;
 	private Snake snake;
 	
+	private boolean paused;
+	
 	public void initialize() {
 		snake = new Snake();
 		board = new GameBoard(snake, 20, 20);
 		
-		for (int i = 0; i < board.getBoard().size(); i++) {
-			for (int j = 0; j < (board.getBoard().get(i)).size(); j++) {
-				if (board.getBoard().get(i).get(j) == TileState.EMPTY) {
+		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
+		
+		checkBoard();
+		board.createFood();
+		scoreText.setText(board.getScore());
+	}
+	
+	private void checkBoard() {
+		grid.getChildren().clear();
+		for (int i = 0; i < board.getTiles().size(); i++) {
+			for (int j = 0; j < (board.getTiles().get(i)).size(); j++) {
+				TileState currentTile = board.getTiles().get(i).get(j);
+				if (currentTile == TileState.EMPTY) {
 					grid.add(new Rectangle(25, 25, Color.WHITE), i, j);
 				}
-				if (board.getBoard().get(i).get(j) == TileState.BORDER) {
+				if (currentTile == TileState.BORDER) {
 					grid.add(new Rectangle(25, 25, Color.BLACK), i, j);
 				}
-				if (board.getBoard().get(i).get(j) == TileState.SNAKE) {
+				if (currentTile == TileState.SNAKE ||
+						currentTile == TileState.SNAKE_HEAD) {
 					grid.add(new Rectangle(25, 25, Color.GREEN), i, j);
+				}
+				if (currentTile == TileState.GAME_OVER) {
+					grid.add(new Rectangle(25, 25, Color.BROWN), i, j);
+					pause();
+				}
+				if (currentTile == TileState.FOOD) {
+					grid.add(new Rectangle(25, 25, Color.RED), i, j);
 				}
 			}
 		}
 	}
 	
+	public void handlePress(KeyCode code) {
+		grid.requestFocus();
+		
+//		if (code == KeyCode.ENTER){
+//			board.moveSnake();
+//			checkBoard();
+//		}
+		
+		if (code == KeyCode.UP) {
+			goUp();
+		}
+		if (code == KeyCode.DOWN) {
+			goDown();
+		}
+		if (code == KeyCode.LEFT) {
+			goLeft();
+		}
+		if (code == KeyCode.RIGHT) {
+			goRight();
+		}
+		
+		if (code == KeyCode.P) {
+			if (paused) {
+				start();
+			}
+			else {
+				pause();
+			}
+		}
+	}
 	
+	public void goUp() {
+		if (snake.getDirection() != Direction.DOWN) {
+			snake.changeDirection(Direction.UP);
+		}
+	}
+	
+	public void goDown() {
+		if (snake.getDirection() != Direction.UP) {
+			snake.changeDirection(Direction.DOWN);
+		}
+	}
+	
+	public void goLeft() {
+		if (snake.getDirection() != Direction.RIGHT) {
+			snake.changeDirection(Direction.LEFT);
+		}
+	}
+	
+	public void goRight() {
+		if (snake.getDirection() != Direction.LEFT) {
+			snake.changeDirection(Direction.RIGHT);
+		}
+	}
+	
+	public void pause() {
+		paused = true;
+		moveTimer.stop();
+	}
+	
+	public void start() {
+		paused = false;
+		moveTimer.start();
+	}
+	
+	private long MOVE_PER_SEC = 20L;
+	private long MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
+	
+	private AnimationTimer moveTimer = new AnimationTimer() {
+		private long last = 0;
+		
+		@Override
+		public void handle(long now) { 
+			if (now - last > MOVE_INTERVAL) {
+				last = now;
+				board.moveSnake();
+				checkBoard();
+				scoreText.setText(board.getScore());
+			}
+		}
+	};
+	
+
 	
 }
