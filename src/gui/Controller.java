@@ -1,5 +1,6 @@
 package gui;
 
+import ScoresDB.Database;
 import data.GameBoard;
 import data.Snake;
 import enums.Direction;
@@ -8,6 +9,9 @@ import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -15,8 +19,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
+
 
 public class Controller {
+	@FXML
+	private ListView names;
+
+	@FXML
+	private ListView scores;
+
+	@FXML
+	private Button HScoresButton;
 	
 	@FXML 
 	private BorderPane canvas;
@@ -26,7 +41,9 @@ public class Controller {
 	
 	@FXML
 	private Text scoreText;
-	
+
+	@FXML
+	private TabPane tabpane;
 	private ObservableList<TileState> tiles = FXCollections.observableArrayList();
 	private GameBoard board;
 	private Snake snake;
@@ -36,6 +53,7 @@ public class Controller {
 	public void initialize() {
 		snake = new Snake();
 		board = new GameBoard(snake, 20, 20);
+		tabpane.getStyleClass().add("tabs");
 		
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
 		
@@ -45,6 +63,7 @@ public class Controller {
 	}
 	
 	private void checkBoard() {
+		grid.requestFocus();
 		grid.getChildren().clear();
 		for (int i = 0; i < board.getTiles().size(); i++) {
 			for (int j = 0; j < (board.getTiles().get(i)).size(); j++) {
@@ -151,7 +170,25 @@ public class Controller {
 			}
 		}
 	};
-	
+
+	public void populatehighscores(){
+		Database hscores = new Database();
+		try {
+			hscores.load_db();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void gotoHighscores(){
+		populatehighscores();
+		tabpane.getSelectionModel().select(1);
+
+	}
+	public void gotoGame(){
+		tabpane.getSelectionModel().select(0);
+		grid.requestFocus();
+	}
 
 	
 }

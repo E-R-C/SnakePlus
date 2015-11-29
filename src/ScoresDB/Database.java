@@ -16,11 +16,9 @@ public class Database {
 
 
     public void load_db() throws SQLException {
-        openConnection();
         String cmd = "CREATE TABLE IF NOT EXISTS SCORES (Name VARCHAR, Date VARCHAR, Score VARCHAR);";
         execute(cmd);
         populate_lists();
-        closeConnection();
     }
 
     public void populate_lists() throws SQLException {
