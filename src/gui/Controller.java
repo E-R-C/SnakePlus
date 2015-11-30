@@ -47,10 +47,12 @@ public class Controller {
 	private ObservableList<TileState> tiles = FXCollections.observableArrayList();
 	private GameBoard board;
 	private Snake snake;
+	private boolean gameOver;
 	
 	private boolean paused;
 	
 	public void initialize() {
+		gameOver = false;
 		snake = new Snake();
 		board = new GameBoard(snake, 20, 20);
 		tabpane.getStyleClass().add("tabs");
@@ -167,6 +169,11 @@ public class Controller {
 				board.moveSnake();
 				checkBoard();
 				scoreText.setText(board.getScore());
+				if (gameOver){
+					// TODO alert the user, that htey died (dialog/alert) then go to high scores pane.
+					// There should be a delay between losing and seeing the score. You want hte user to see how they lost.
+					gotoHighscores();
+				}
 			}
 		}
 	};

@@ -1,5 +1,8 @@
 package data;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * Created by Eric on 11/23/2015.
  */
@@ -11,16 +14,16 @@ public class Score {
         this.date = name;
     }
 
-    public String getDate() {
-        return date;
+    public StringProperty getDate() {
+        return new SimpleStringProperty(date);
     }
 
-    public String getName() {
-        return name;
+    public StringProperty getName() {
+        return new SimpleStringProperty(name);
     }
 
-    public String getScore() {
-        return score;
+    public StringProperty getScore() {
+        return new SimpleStringProperty(score);
     }
 
 }

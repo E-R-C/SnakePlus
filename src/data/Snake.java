@@ -13,7 +13,7 @@ public class Snake {
 	private int size = 2;
 	private Tuple head = new Tuple(3, 3);
 	private ArrayDeque<Tuple> body = new ArrayDeque<Tuple>();
-	private Direction direction = Direction.DOWN; 
+	private Direction direction = Direction.DOWN;
 	private boolean eaten;
 	
 	public Snake() { 
