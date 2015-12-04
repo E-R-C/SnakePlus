@@ -1,7 +1,6 @@
 package data;
 
 import java.util.Random;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import enums.TileState;
@@ -12,7 +11,6 @@ public class GameBoard {
 	private int height; 
 	private Snake snake;
 	private Tuple foodTile = new Tuple(0, 0);
-	
 	private String score = "0";
 	
 	private ObservableList<ObservableList<TileState>> tiles = FXCollections.observableArrayList();
@@ -23,7 +21,6 @@ public class GameBoard {
 		this.width = width;
 		
 		checkTiles();
-		
 	}
 	
 	private void checkTiles() {
@@ -101,6 +98,11 @@ public class GameBoard {
 	public String getScore() {
 		return score;
 	}
+	
+	//Couldn't we just make score at the beginning an int. It would make increasing
+	// it easier.  Then when you get score, you just have the code:
+	// return " " + score
+	// or something of that effect.
 	private void incScore() {
 		int score = Integer.parseInt(this.score);
 		score++;
