@@ -23,43 +23,47 @@ public class GameBoard {
 		checkTiles();
 	}
 	
+	private void checkTuple(int i, int j){
+		Tuple tuple = new Tuple(i, j);
+		if (snake.getHead().equals(tuple)) {
+			if (i == 0 || i == width - 1 || j == 0 || j == height - 1
+					|| snake.getBody().contains(tuple)) {
+				tiles.get(i).add(TileState.GAME_OVER);
+			}
+			else {
+				tiles.get(i).add(TileState.SNAKE_HEAD);
+			}					
+			if (tuple.equals(foodTile)) {
+				snake.eat();
+				incScore();
+			}
+
+		}
+		else {
+			if (i == 0 || i == width - 1 || j == 0 || j == height - 1) {
+				tiles.get(i).add(TileState.BORDER);
+			}
+
+			else if (snake.getBody().contains(tuple)) {
+				tiles.get(i).add(TileState.SNAKE);
+			}
+			
+			else if (tuple.equals(foodTile)) {
+				tiles.get(i).add(TileState.FOOD);
+			}
+			
+			else {
+				tiles.get(i).add(TileState.EMPTY);
+			}
+		}
+	}
+	
 	private void checkTiles() {
 		tiles.clear();
 		for (int i = 0; i < width; i++) {
 			tiles.add(FXCollections.observableArrayList());
 			for (int j = 0; j < height; j++) {
-				Tuple tuple = new Tuple(i, j);
-				if (snake.getHead().equals(tuple)) {
-					if (i == 0 || i == width - 1 || j == 0 || j == height - 1
-							|| snake.getBody().contains(tuple)) {
-						tiles.get(i).add(TileState.GAME_OVER);
-					}
-					else {
-						tiles.get(i).add(TileState.SNAKE_HEAD);
-					}					
-					if (tuple.equals(foodTile)) {
-						snake.eat();
-						incScore();
-					}
-
-				}
-				else {
-					if (i == 0 || i == width - 1 || j == 0 || j == height - 1) {
-						tiles.get(i).add(TileState.BORDER);
-					}
-
-					else if (snake.getBody().contains(tuple)) {
-						tiles.get(i).add(TileState.SNAKE);
-					}
-					
-					else if (tuple.equals(foodTile)) {
-						tiles.get(i).add(TileState.FOOD);
-					}
-					
-					else {
-						tiles.get(i).add(TileState.EMPTY);
-					}
-				}
+				checkTuple(i, j);
 			}
 		}	
 		if (snake.hasEaten()) {
@@ -75,9 +79,7 @@ public class GameBoard {
 			x = randInt(1, height - 1);
 			y = randInt(1, width - 1);
 		}
-		
 		foodTile = new Tuple(x, y);
-		
 	}
 	
 	private int randInt(int min, int max) {
