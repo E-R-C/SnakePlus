@@ -29,30 +29,21 @@ public class GameBoard {
 			if (i == 0 || i == width - 1 || j == 0 || j == height - 1
 					|| snake.getBody().contains(tuple)) {
 				tiles.get(i).add(TileState.GAME_OVER);
-			}
-			else {
+			}else {
 				tiles.get(i).add(TileState.SNAKE_HEAD);
 			}					
 			if (tuple.equals(foodTile)) {
 				snake.eat();
 				incScore();
 			}
-
-		}
-		else {
+		}else {
 			if (i == 0 || i == width - 1 || j == 0 || j == height - 1) {
 				tiles.get(i).add(TileState.BORDER);
-			}
-
-			else if (snake.getBody().contains(tuple)) {
+			}else if (snake.getBody().contains(tuple)) {
 				tiles.get(i).add(TileState.SNAKE);
-			}
-			
-			else if (tuple.equals(foodTile)) {
+			}else if (tuple.equals(foodTile)) {
 				tiles.get(i).add(TileState.FOOD);
-			}
-			
-			else {
+			}else {
 				tiles.get(i).add(TileState.EMPTY);
 			}
 		}

@@ -16,8 +16,7 @@ public class Tuple {
 	public boolean equals(Object other) {
 		if (!(other instanceof Tuple)) {
 			return false;
-		}
-		else {
+		}else {
 			return x == ((Tuple) other).x && y == ((Tuple) other).y;
 		}
 	}
