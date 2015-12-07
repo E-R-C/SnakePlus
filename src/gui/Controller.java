@@ -158,9 +158,9 @@ public class Controller {
 		moveTimer.start();
 	}
 	
-	private long MOVE_PER_SEC = board.getSnake_speed();
+	private long MOVE_PER_SEC = 20L;
 	private long MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
-	
+
 	private AnimationTimer moveTimer = new AnimationTimer() {
 		private long last = 0;
 		
@@ -172,12 +172,6 @@ public class Controller {
 				checkBoard();
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
-				if (gameOver){
-
-					// TODO alert the user, that htey died (dialog/alert) then go to high scores pane.
-					// There should be a delay between losing and seeing the score. You want hte user to see how they lost.
-
-				}
 			}
 		}
 	};

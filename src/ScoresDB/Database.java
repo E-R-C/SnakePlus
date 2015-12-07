@@ -35,7 +35,7 @@ public class Database {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        con = DriverManager.getConnection("jdbc:sqlite:story.db");
+        con = DriverManager.getConnection("jdbc:sqlite:scores.db");
         stat = con.createStatement();
     }
     private void closeConnection() throws SQLException{
