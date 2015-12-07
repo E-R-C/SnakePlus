@@ -16,6 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
@@ -31,13 +33,16 @@ public class Controller {
 	private GridPane grid;
 	
 	@FXML
-	private Text scoreText;
+	private Text scoreText, scoreText2;
 
 	@FXML
 	private TabPane tabpane;
+	@FXML
+	private TextField nameEntry;
 	private GameBoard board;
 	private Snake snake;
 	private boolean gameOver;
+	Database hscores;
 	
 	private boolean paused;
 	
@@ -72,6 +77,7 @@ public class Controller {
 			pause();
 			Alert gameover = new Alert(Alert.AlertType.CONFIRMATION, "Game Over");
 			gameover.show();
+			scoreText2.setText(scoreText.getText());
 			gotoHighscores();
 		}
 		if (currentTile == TileState.FOOD) {
@@ -88,7 +94,7 @@ public class Controller {
 			}
 		}
 	}
-	
+
 	public void handlePress(KeyCode code) {
 		grid.requestFocus();
 		
@@ -177,7 +183,7 @@ public class Controller {
 	};
 
 	public void populatehighscores(){
-		Database hscores = new Database();
+		hscores = new Database();
 		try {
 			hscores.load_db();
 		} catch (SQLException e) {
@@ -193,6 +199,14 @@ public class Controller {
 	public void gotoGame(){
 		tabpane.getSelectionModel().select(0);
 		grid.requestFocus();
+	}
+	public void insertScore(){
+		try {
+			hscores.add_score(scoreText2.getText(), nameEntry.getName());
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.show();
+		}
 	}
 
 	

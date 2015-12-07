@@ -122,11 +122,11 @@
                   <VBox>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your Score: " textAlignment="CENTER" wrappingWidth="521.6708984375" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="521.6708984375" />
+                        <Text fx:id="scoreText2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="521.6708984375" />
                         <HBox>
                            <children>
                               <TextField prefHeight="31.0" prefWidth="522.0" promptText="Your Name" BorderPane.alignment="CENTER" />
-                              <Button mnemonicParsing="false" text="Submit Score" />
+                              <Button mnemonicParsing="false" onAction="#insertScore" text="Submit Score" />
                            </children>
                         </HBox>
                      </children>

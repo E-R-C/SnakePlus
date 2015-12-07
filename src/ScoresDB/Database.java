@@ -23,11 +23,15 @@ public class Database {
 
     public void populate_lists() throws SQLException {
         openConnection();
-        ResultSet rs = stat.executeQuery( "SELECT * FROM SCORES DESC LIMIT 10;" );
+        ResultSet rs = stat.executeQuery( "SELECT * FROM SCORES DESC;" );
         while(rs.next()){
             scores.add(new Score(rs.getString("Name"), rs.getString("Score"), rs.getString("Date")));
         }
         closeConnection();
+    }
+    public void add_score(String name, String score) throws SQLException{
+        String cmd = "INSERT INTO SCORES (Name, Score) VALUES (' " + name + "," + score + "');";
+        execute(cmd);
     }
     private void openConnection() throws SQLException {
         try {
