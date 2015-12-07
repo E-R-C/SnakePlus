@@ -12,7 +12,7 @@
    <tabs>
       <Tab text="Game">
          <content>
-            <BorderPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0">
+            <BorderPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0">
                <center>
                   <GridPane fx:id="grid" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
@@ -62,7 +62,7 @@
                   </GridPane>
                </center>
                <bottom>
-                  <AnchorPane prefHeight="125.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="75.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Quit Game" />
                         <Button layoutX="300.0" layoutY="31.0" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="150.0" text="New Game" />
@@ -70,7 +70,7 @@
                   </AnchorPane>
                </bottom>
                <top>
-                  <AnchorPane prefHeight="125.0" prefWidth="750.0" BorderPane.alignment="CENTER" />
+                  <AnchorPane prefHeight="25.0" prefWidth="750.0" BorderPane.alignment="CENTER" />
                </top>
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
@@ -115,7 +115,6 @@
                     <columns>
                       <TableColumn fx:id="nameColumn" prefWidth="204.0" text="Name" />
                       <TableColumn fx:id="scoreColumn" minWidth="0.0" prefWidth="333.0" text="Score" />
-                        <TableColumn fx:id="dateColumn" prefWidth="212.0" text="Date" />
                     </columns>
                   </TableView>
                </center>

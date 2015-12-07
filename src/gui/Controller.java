@@ -77,8 +77,7 @@ public class Controller {
 				cellData -> cellData.getValue().getName());
 		scoreColumn.setCellValueFactory(
 				cellData -> cellData.getValue().getScore());
-		dateColumn.setCellValueFactory(
-				cellData -> cellData.getValue().getDate());
+		populatehighscores();
 		scoreTable.setItems(hscores.getScores());
 	}
 	
@@ -219,21 +218,21 @@ public class Controller {
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
 
-				if (board.getScore() == 20) {
+				if (board.getScore() == 10) {
 					level = Level.LEVEL_2;
 					reset();
 					levelText.setText("2");
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 40) {
+				else if (board.getScore() == 20) {
 					level = Level.LEVEL_3;
 					reset();
 					levelText.setText("3");
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 60) {
+				else if (board.getScore() == 30) {
 					level = Level.LEVEL_4;
 					reset();
 					levelText.setText("4");

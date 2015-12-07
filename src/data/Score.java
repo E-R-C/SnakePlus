@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
  */
 public class Score {
     private StringProperty score, name, date;
-    public Score(String name, String score, String date){
+    public Score(String score, String name, String date){
         this.score = new SimpleStringProperty(score);
         this.name = new SimpleStringProperty(name);
         this.date = new SimpleStringProperty(name);

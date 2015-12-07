@@ -5,9 +5,9 @@ import data.Snake;
 
 public enum Level {
 	LEVEL_1 (15, 15, 20L, 0),
-	LEVEL_2 (15, 15, 40L, 20),
-	LEVEL_3 (12, 12, 30L, 40),
-	LEVEL_4 (20, 20, 50L, 60);
+	LEVEL_2 (15, 15, 40L, 10),
+	LEVEL_3 (12, 12, 30L, 20),
+	LEVEL_4 (20, 20, 50L, 30);
 	private final int height;
     private final int width;
     private final long speed;
