@@ -7,8 +7,7 @@ import enums.TileState;
 
 public class GameBoard {
 	
-	private int width;
-	private int height; 
+	private int width, height, snake_speed;
 	private Snake snake;
 	private Tuple foodTile = new Tuple(0, 0);
 	private String score = "0";
@@ -19,6 +18,7 @@ public class GameBoard {
 		this.snake = snake;
 		this.height = height;
 		this.width = width;
+		snake_speed = snake.getSpeed();
 		
 		checkTiles();
 	}
@@ -87,7 +87,18 @@ public class GameBoard {
 		snake.move();
 		checkTiles();
 	}
-	
+	public void setSnakeSpeed(int spd){
+		snake_speed = spd;
+	}
+	public void incSnakeSpeed(){
+		snake_speed++;
+	}
+	public void decSnakeSpeed(){
+		snake_speed--;
+	}
+	public int getSnake_speed(){
+		return snake_speed;
+	}
 	public String getScore() {
 		return score;
 	}
