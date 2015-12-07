@@ -92,7 +92,9 @@ public class GameBoard {
 	}
 
 	public boolean isValidSquare(int x, int y){
-		return tiles.get(x).get(y) == TileState.EMPTY;
+		return (tiles.get(x).get(y) == TileState.EMPTY) && 
+				(Math.abs(x - snake.getHead().getX()) < 4) && 
+				(Math.abs(y - snake.getHead().getY()) < 4);
 	}
 
 	private Tuple create(){

@@ -48,7 +48,7 @@ public class Controller {
 	
 	public void initialize() {
 		snake = new Snake();
-		board = new GameBoard(snake, 10, 10);
+		board = new GameBoard(snake, 15, 15);
 		tabpane.getStyleClass().add("tabs");
 		
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
@@ -162,6 +162,11 @@ public class Controller {
 	public void start() {
 		paused = false;
 		moveTimer.start();
+	}
+	
+	public void reset() {
+		initialize();
+		start();
 	}
 	
 	private long MOVE_PER_SEC = 20L;
