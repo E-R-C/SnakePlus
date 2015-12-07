@@ -33,8 +33,7 @@ public class Snake {
 	public void move() {
 		if (!eaten) {
 			body.remove();
-		}
-		else {
+		}else {
 			eaten = false;
 		}
 		

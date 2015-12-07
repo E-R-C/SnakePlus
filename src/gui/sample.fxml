@@ -93,12 +93,14 @@
                <top>
                   <Button mnemonicParsing="false" onAction="#gotoGame" text="Back" BorderPane.alignment="CENTER" />
                </top>
-               <left>
-                  <ListView fx:id="names" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </left>
-               <right>
-                  <ListView fx:id="scores" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </right>
+               <center>
+                  <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn prefWidth="204.0" text="Name" />
+                      <TableColumn minWidth="0.0" prefWidth="333.0" text="Score" />
+                    </columns>
+                  </TableView>
+               </center>
             </BorderPane>
          </content>
       </Tab>

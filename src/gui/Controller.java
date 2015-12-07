@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -18,18 +17,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 
 public class Controller {
-	@FXML
-	private ListView names;
-
-	@FXML
-	private ListView scores;
-
 	@FXML
 	private Button HScoresButton;
 	
@@ -64,29 +56,33 @@ public class Controller {
 		scoreText.setText(board.getScore());
 	}
 	
+	private void checkTileState(int i, int j){
+		TileState currentTile = board.getTiles().get(i).get(j);
+		if (currentTile == TileState.EMPTY) {
+			grid.add(new Rectangle(25, 25, Color.WHITE), i, j);
+		}
+		if (currentTile == TileState.BORDER) {
+			grid.add(new Rectangle(25, 25, Color.BLACK), i, j);
+		}
+		if (currentTile == TileState.SNAKE ||
+				currentTile == TileState.SNAKE_HEAD) {
+			grid.add(new Rectangle(25, 25, Color.GREEN), i, j);
+		}
+		if (currentTile == TileState.GAME_OVER) {
+			grid.add(new Rectangle(25, 25, Color.BROWN), i, j);
+			pause();
+		}
+		if (currentTile == TileState.FOOD) {
+			grid.add(new Rectangle(25, 25, Color.RED), i, j);
+		}
+	}
+	
 	private void checkBoard() {
 		grid.requestFocus();
 		grid.getChildren().clear();
 		for (int i = 0; i < board.getTiles().size(); i++) {
 			for (int j = 0; j < (board.getTiles().get(i)).size(); j++) {
-				TileState currentTile = board.getTiles().get(i).get(j);
-				if (currentTile == TileState.EMPTY) {
-					grid.add(new Rectangle(25, 25, Color.WHITE), i, j);
-				}
-				if (currentTile == TileState.BORDER) {
-					grid.add(new Rectangle(25, 25, Color.BLACK), i, j);
-				}
-				if (currentTile == TileState.SNAKE ||
-						currentTile == TileState.SNAKE_HEAD) {
-					grid.add(new Rectangle(25, 25, Color.GREEN), i, j);
-				}
-				if (currentTile == TileState.GAME_OVER) {
-					grid.add(new Rectangle(25, 25, Color.BROWN), i, j);
-					pause();
-				}
-				if (currentTile == TileState.FOOD) {
-					grid.add(new Rectangle(25, 25, Color.RED), i, j);
-				}
+				checkTileState(i, j);
 			}
 		}
 	}
@@ -113,12 +109,16 @@ public class Controller {
 		}
 		
 		if (code == KeyCode.P) {
-			if (paused) {
-				start();
-			}
-			else {
-				pause();
-			}
+			checkPause();
+		}
+	}
+	
+	private void checkPause(){
+		if (paused) {
+			start();
+		}
+		else {
+			pause();
 		}
 	}
 	
