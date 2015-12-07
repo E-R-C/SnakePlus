@@ -2,6 +2,7 @@ package ScoresDB;
 
 import data.Score;
 import data.Tuple;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
@@ -16,6 +17,7 @@ public class Database {
 
 
     public void load_db() throws SQLException {
+        scores = FXCollections.observableArrayList();
         String cmd = "CREATE TABLE IF NOT EXISTS SCORES (Name VARCHAR, Date VARCHAR, Score VARCHAR);";
         execute(cmd);
         populate_lists();

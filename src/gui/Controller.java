@@ -75,8 +75,7 @@ public class Controller {
 				cellData -> cellData.getValue().getName());
 		scoreColumn.setCellValueFactory(
 				cellData -> cellData.getValue().getScore());
-		dateColumn.setCellValueFactory(
-				cellData -> cellData.getValue().getDate());
+		populatehighscores();
 		scoreTable.setItems(hscores.getScores());
 	}
 	
