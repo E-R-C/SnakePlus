@@ -26,7 +26,6 @@ import java.sql.SQLException;
 import data.Score;
 
 public class Controller {
-	
 	@FXML 
 	private BorderPane canvas;
 	
@@ -83,7 +82,11 @@ public class Controller {
 //				cellData -> cellData.getValue().getDate());
 		scoreTable.setItems(hscores.getScores());
 	}
-	
+
+	public void newGame(){
+		board.setScore(0);
+		reset();
+	}
 	private void checkTileState(int i, int j){
 		TileState currentTile = board.getTiles().get(i).get(j);
 		if (currentTile == TileState.EMPTY) {

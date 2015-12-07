@@ -65,7 +65,7 @@
                   <AnchorPane prefHeight="75.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Quit Game" />
-                        <Button layoutX="300.0" layoutY="31.0" mnemonicParsing="false" onAction="#reset" prefHeight="30.0" prefWidth="150.0" text="New Game" />
+                        <Button layoutX="300.0" layoutY="31.0" mnemonicParsing="false" onAction="#newGame" prefHeight="30.0" prefWidth="150.0" text="New Game" />
                      </children>
                   </AnchorPane>
                </bottom>
