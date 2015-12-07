@@ -7,6 +7,7 @@ import enums.Direction;
 import enums.TileState;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
@@ -42,7 +43,7 @@ public class Controller {
 	
 	public void initialize() {
 		snake = new Snake();
-		board = new GameBoard(snake, 20, 20);
+		board = new GameBoard(snake, 10, 10);
 		tabpane.getStyleClass().add("tabs");
 		
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
@@ -69,6 +70,9 @@ public class Controller {
 		if (currentTile == TileState.GAME_OVER) {
 			grid.add(new Rectangle(25, 25, Color.BROWN), i, j);
 			pause();
+			Alert gameover = new Alert(Alert.AlertType.CONFIRMATION, "Game Over");
+			gameover.show();
+			gotoHighscores();
 		}
 		if (currentTile == TileState.FOOD) {
 			grid.add(new Rectangle(25, 25, Color.RED), i, j);
@@ -154,7 +158,7 @@ public class Controller {
 		moveTimer.start();
 	}
 	
-	private long MOVE_PER_SEC = 20L;
+	private long MOVE_PER_SEC = board.getSnake_speed();
 	private long MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 	
 	private AnimationTimer moveTimer = new AnimationTimer() {
@@ -169,9 +173,10 @@ public class Controller {
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
 				if (gameOver){
+
 					// TODO alert the user, that htey died (dialog/alert) then go to high scores pane.
 					// There should be a delay between losing and seeing the score. You want hte user to see how they lost.
-					gotoHighscores();
+
 				}
 			}
 		}
