@@ -5,10 +5,9 @@ import data.Snake;
 
 public enum Level {
 	LEVEL_1 (15, 15, 20L, 0),
-	LEVEL_2 (15, 15, 22L, 20),
-	LEVEL_3 (12, 12, 25L, 40),
-	LEVEL_4 (20, 20, 30L, 50);
-	
+	LEVEL_2 (15, 15, 40L, 20),
+	LEVEL_3 (12, 12, 30L, 40),
+	LEVEL_4 (20, 20, 50L, 60);
 	private final int height;
     private final int width;
     private final long speed;
@@ -23,9 +22,10 @@ public enum Level {
         this.score = score;
     }
     
-    private GameBoard setNewBoard(){
+    public GameBoard setNewBoard(){
+        snake = new Snake();
     	board = new GameBoard(snake, height, width);
-//    	board.setSnakeSpeed(speed);
+    	board.setSnakeSpeed(speed);
     	board.setScore(score);
     	return board;
     }

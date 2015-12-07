@@ -30,7 +30,7 @@ public class Database {
         closeConnection();
     }
     public void add_score(String name, String score) throws SQLException{
-        String cmd = "INSERT INTO SCORES (Name, Score) VALUES (' " + name + "," + score + "');";
+        String cmd = "INSERT INTO SCORES (Name, Score) VALUES (' " + name + "','" + score + "');";
         execute(cmd);
     }
     private void openConnection() throws SQLException {
