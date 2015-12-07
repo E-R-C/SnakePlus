@@ -213,7 +213,7 @@ public class Controller {
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
 
-				if (board.getScore() == 20) {
+				if (board.getScore() == 10) {
 					level = Level.LEVEL_2;
 					reset();
 					start();
@@ -221,7 +221,7 @@ public class Controller {
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 40) {
+				else if (board.getScore() == 20) {
 					level = Level.LEVEL_3;
 					reset();
 					start();
@@ -229,7 +229,7 @@ public class Controller {
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 60) {
+				else if (board.getScore() == 30) {
 					level = Level.LEVEL_4;
 					reset();
 					start();
