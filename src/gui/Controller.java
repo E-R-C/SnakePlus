@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -23,12 +22,6 @@ import java.util.concurrent.TimeUnit;
 
 
 public class Controller {
-	@FXML
-	private ListView names;
-
-	@FXML
-	private ListView scores;
-
 	@FXML
 	private Button HScoresButton;
 	
