@@ -48,7 +48,7 @@ public class Controller {
 	
 	public void initialize() {
 		snake = new Snake();
-		board = new GameBoard(snake, 15, 15);
+		board = new GameBoard(snake, 20, 20);
 		tabpane.getStyleClass().add("tabs");
 		
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
