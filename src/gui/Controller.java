@@ -71,6 +71,8 @@ public class Controller {
 		board.createFood();
 		scoreText.setText("" + board.getScore());
 		
+		populatehighscores();
+		
 		nameColumn.setCellValueFactory(
 				cellData -> cellData.getValue().getName());
 		scoreColumn.setCellValueFactory(
@@ -195,7 +197,10 @@ public class Controller {
 	}
 	
 	public void reset() {
-		initialize();
+		board = level.setNewBoard();
+		snake = board.getSnake();
+		checkBoard();
+		board.createFood();
 		start();
 	}
 	
@@ -217,7 +222,6 @@ public class Controller {
 				if (board.getScore() == 20) {
 					level = Level.LEVEL_2;
 					reset();
-					start();
 					levelText.setText("2");
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
@@ -225,7 +229,6 @@ public class Controller {
 				else if (board.getScore() == 40) {
 					level = Level.LEVEL_3;
 					reset();
-					start();
 					levelText.setText("3");
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
@@ -233,7 +236,6 @@ public class Controller {
 				else if (board.getScore() == 60) {
 					level = Level.LEVEL_4;
 					reset();
-					start();
 					levelText.setText("4");
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
