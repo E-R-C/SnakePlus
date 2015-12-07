@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.shape.*?>
@@ -73,7 +74,23 @@
                   <AnchorPane prefHeight="125.0" prefWidth="750.0" BorderPane.alignment="CENTER" />
                </top>
                <left>
-                  <AnchorPane prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER" />
+                  <AnchorPane prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text layoutX="18.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Controls" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="24.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrow Keys:" wrappingWidth="77.26318359375" />
+                        <Text layoutX="35.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P: Pause" />
+                        <Text layoutX="30.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spacebar:" />
+                        <Text layoutX="5.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Direction" />
+                        <Text layoutX="15.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use Power-Up" />
+                        <Text layoutX="31.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="W/A/S/D:" />
+                        <Text layoutX="5.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Direction" />
+                        <Text layoutX="37.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Escape:" />
+                        <Text layoutX="28.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Game" />
+                     </children></AnchorPane>
                </left>
                <right>
                   <AnchorPane prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
