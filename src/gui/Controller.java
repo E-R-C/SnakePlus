@@ -20,12 +20,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
 
 
 public class Controller {
-	@FXML
-	private Button HScoresButton;
 	
 	@FXML 
 	private BorderPane canvas;
@@ -42,8 +39,7 @@ public class Controller {
 	private TextField nameEntry;
 	private GameBoard board;
 	private Snake snake;
-	private boolean gameOver;
-	Database hscores;
+	private Database hscores;
 	
 	private boolean paused;
 
