@@ -6,8 +6,6 @@ import data.Snake;
 import enums.Direction;
 import enums.TileState;
 import javafx.animation.AnimationTimer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
@@ -36,7 +34,6 @@ public class Controller {
 
 	@FXML
 	private TabPane tabpane;
-	private ObservableList<TileState> tiles = FXCollections.observableArrayList();
 	private GameBoard board;
 	private Snake snake;
 	private boolean gameOver;
