@@ -55,7 +55,8 @@ public class Controller {
 	private Database hscores;
 	
 	private boolean paused;
-
+	private boolean leveled;
+	
 	private int obstacleCounter;
 
 	private Level level = Level.LEVEL_1;
@@ -219,24 +220,31 @@ public class Controller {
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
 
-				if (board.getScore() == 20) {
+				if (board.getScore() == 20 && !leveled) {
 					level = Level.LEVEL_2;
 					reset();
 					levelText.setText("2");
+					leveled = true;
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 40) {
+				else if (board.getScore() == 40 && !leveled) {
 					level = Level.LEVEL_3;
 					reset();
 					levelText.setText("3");
+					leveled = true;
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 60) {
+				else if (board.getScore() != 40 && board.getScore() != 20
+						&& board.getScore() != 60) {
+					leveled = false;
+				}
+				else if (board.getScore() == 60 && !leveled) {
 					level = Level.LEVEL_4;
 					reset();
 					levelText.setText("4");
+					leveled = true;
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
