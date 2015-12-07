@@ -4,16 +4,12 @@ import ScoresDB.Database;
 import data.GameBoard;
 import data.Snake;
 import enums.Direction;
-import enums.Level;
 import enums.TileState;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -21,11 +17,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
-import data.Score;
 
 public class Controller {
+	@FXML
+	private Button HScoresButton;
 	
 	@FXML 
 	private BorderPane canvas;
@@ -34,17 +33,7 @@ public class Controller {
 	private GridPane grid;
 	
 	@FXML
-	private Text scoreText, scoreText2, levelText;
-	
-	@FXML
-	private TableView<Score> scoreTable;
-	
-	@FXML
-	private TableColumn<Score, String> nameColumn;
-	@FXML
-	private TableColumn<Score, String> scoreColumn;
-	@FXML
-	private TableColumn<Score, String>dateColumn;
+	private Text scoreText, scoreText2;
 
 	@FXML
 	private TabPane tabpane;
@@ -52,17 +41,14 @@ public class Controller {
 	private TextField nameEntry;
 	private GameBoard board;
 	private Snake snake;
-	private Database hscores;
+	private boolean gameOver;
+	Database hscores;
 	
 	private boolean paused;
-
-	private int obstacleCounter;
-
-	private Level level = Level.LEVEL_1;
-
+	
 	public void initialize() {
-		board = level.setNewBoard();
-		snake = board.getSnake();
+		snake = new Snake();
+		board = new GameBoard(snake, 20, 20);
 		tabpane.getStyleClass().add("tabs");
 		
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
@@ -70,13 +56,6 @@ public class Controller {
 		checkBoard();
 		board.createFood();
 		scoreText.setText("" + board.getScore());
-		
-		nameColumn.setCellValueFactory(
-				cellData -> cellData.getValue().getName());
-		scoreColumn.setCellValueFactory(
-				cellData -> cellData.getValue().getScore());
-		populatehighscores();
-		scoreTable.setItems(hscores.getScores());
 	}
 	
 	private void checkTileState(int i, int j){
@@ -93,21 +72,8 @@ public class Controller {
 			temp.setStroke(Color.BLACK);
 			grid.add(temp, i, j);
 		}
-		if (currentTile == TileState.POWERED_SNAKE ||
-				currentTile == TileState.POWERED_SNAKE_HEAD) {
-			Rectangle temp = new Rectangle(25, 25, Color.NAVY);
-			temp.setStroke(Color.BLACK);
-			grid.add(temp, i, j);
-		}
-		if (currentTile == TileState.OBSTACLE) {
-			grid.add(new Rectangle(25, 25, Color.DARKGRAY), i, j);
-		}
-		if (currentTile == TileState.POWER_UP) {
-			grid.add(new Rectangle(25, 25, Color.NAVY), i, j);
-		}
-
 		if (currentTile == TileState.GAME_OVER) {
-			grid.add(new Rectangle(25, 25, Color.MAROON), i, j);
+			grid.add(new Rectangle(25, 25, Color.BROWN), i, j);
 			pause();
 			Alert gameover = new Alert(Alert.AlertType.CONFIRMATION, "Game Over");
 			gameover.show();
@@ -132,6 +98,11 @@ public class Controller {
 	public void handlePress(KeyCode code) {
 		grid.requestFocus();
 		
+//		if (code == KeyCode.ENTER){
+//			board.moveSnake();
+//			checkBoard();
+//		}
+		
 		if (code == KeyCode.UP || code == KeyCode.W) {
 			goUp();
 		}
@@ -144,7 +115,7 @@ public class Controller {
 		if (code == KeyCode.RIGHT || code == KeyCode.D) {
 			goRight();
 		}
-
+		
 		if (code == KeyCode.P) {
 			checkPause();
 		}
@@ -212,40 +183,6 @@ public class Controller {
 				checkBoard();
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
-
-				if (board.getScore() == 10) {
-					level = Level.LEVEL_2;
-					reset();
-					start();
-					levelText.setText("2");
-					MOVE_PER_SEC = board.getSnake_speed();
-					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
-				}
-				else if (board.getScore() == 20) {
-					level = Level.LEVEL_3;
-					reset();
-					start();
-					levelText.setText("3");
-					MOVE_PER_SEC = board.getSnake_speed();
-					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
-				}
-				else if (board.getScore() == 30) {
-					level = Level.LEVEL_4;
-					reset();
-					start();
-					levelText.setText("4");
-					MOVE_PER_SEC = board.getSnake_speed();
-					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
-				}
-				if (level == Level.LEVEL_2 || level == Level.LEVEL_4) {
-					obstacleCounter++;
-					if (obstacleCounter == 30) {
-						obstacleCounter = 0;
-						board.createRandomWall();
-						board.createPowerUp();
-					}
-				}
-
 			}
 		}
 	};
@@ -270,7 +207,7 @@ public class Controller {
 	}
 	public void insertScore(){
 		try {
-			hscores.add_score(scoreText2.getText(), nameEntry.getText());
+			hscores.add_score(scoreText2.getText(), nameEntry.getName());
 		} catch (SQLException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.show();

@@ -6,7 +6,6 @@ public enum TileState {
 	SNAKE_HEAD,
 	POWERED_SNAKE,
 	POWERED_SNAKE_HEAD,
-	POWER_UP,
 	FOOD,
 	BORDER, 
 	OBSTACLE,
