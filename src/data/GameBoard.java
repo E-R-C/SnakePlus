@@ -7,14 +7,15 @@ import javafx.collections.ObservableList;
 import enums.TileState;
 
 public class GameBoard {
-	
+
 	private int width, height, score;
 	private long snakeSpeed;
 	private Snake snake;
 	private Tuple foodTile = new Tuple(0, 0);
+	private Tuple powerUpTile = new Tuple(0, 0);
 	private ArrayList<Tuple> tempWallList = new ArrayList();
 	private boolean powered;
-	
+
 	private ObservableList<ObservableList<TileState>> tiles = FXCollections.observableArrayList();
 
 	public GameBoard(Snake snake, int height, int width) {
@@ -22,12 +23,16 @@ public class GameBoard {
 		this.height = height;
 		this.width = width;
 		this.score = 0;
-		
+
 		snakeSpeed = 20L;
-		
+
 		checkTiles();
 	}
-	
+
+	public Snake getSnake() {
+		return snake;
+	}
+
 	private void checkTuple(int i, int j){
 		Tuple tuple = new Tuple(i, j);
 		if (snake.getHead().equals(tuple)) {
@@ -35,17 +40,18 @@ public class GameBoard {
 					|| snake.getBody().contains(tuple)) {
 				tiles.get(i).add(TileState.GAME_OVER);
 			}
-			
+
 			else if (tempWallList.contains(tuple)) {
 				if (powered) {
 					tiles.get(i).add(TileState.SNAKE_HEAD);
+					powered = false;
 				}
 				else {
 					tiles.get(i).add(TileState.GAME_OVER);
 				}
-				
+
 			}
-			
+
 			else {
 				if (powered) {
 					tiles.get(i).add(TileState.POWERED_SNAKE_HEAD);
@@ -53,10 +59,13 @@ public class GameBoard {
 				else {
 					tiles.get(i).add(TileState.SNAKE_HEAD);
 				}
-			}					
+			}
 			if (tuple.equals(foodTile)) {
 				snake.eat();
 				incScore();
+			}
+			if (tuple.equals(powerUpTile)) {
+				powered = true;
 			}
 		}else {
 			if (i == 0 || i == width - 1 || j == 0 || j == height - 1) {
@@ -72,12 +81,15 @@ public class GameBoard {
 				tiles.get(i).add(TileState.OBSTACLE);
 			}else if (tuple.equals(foodTile)) {
 				tiles.get(i).add(TileState.FOOD);
-			}else {
+			}else if (tuple.equals(powerUpTile) && !powered) {
+				tiles.get(i).add(TileState.POWER_UP);
+			}
+			else {
 				tiles.get(i).add(TileState.EMPTY);
 			}
 		}
 	}
-	
+
 	private void checkTiles() {
 		tiles.clear();
 		for (int i = 0; i < width; i++) {
@@ -85,16 +97,16 @@ public class GameBoard {
 			for (int j = 0; j < height; j++) {
 				checkTuple(i, j);
 			}
-		}	
+		}
 		if (snake.hasEaten()) {
 			createFood();
 		}
 	}
 
 	public boolean isValidSquare(int x, int y){
-		return (tiles.get(x).get(y) == TileState.EMPTY) && 
-				(Math.abs(x - snake.getHead().getX()) < 4) && 
-				(Math.abs(y - snake.getHead().getY()) < 4);
+		return (tiles.get(x).get(y) == TileState.EMPTY) &&
+				(Math.abs(x - snake.getHead().getX()) > 4) &&
+				(Math.abs(y - snake.getHead().getY()) > 4);
 	}
 
 	private Tuple create(){
@@ -107,28 +119,32 @@ public class GameBoard {
 		}
 		return new Tuple(x,y);
 	}
-	public void createrRandomWall(){
+	public void createRandomWall(){
 		tempWallList.add(create());
 	}
+	public void createPowerUp() {
+		powerUpTile = create();
+	}
+
 	public void createFood() {
 		foodTile = create();
 	}
-	
+
 	private int randInt(int min, int max) {
-	    Random rand = new Random();
-	    int num = rand.nextInt((max - min) + 1) + min;
-	    return num;
+		Random rand = new Random();
+		int num = rand.nextInt((max - min) + 1) + min;
+		return num;
 	}
-	
+
 	public ObservableList<ObservableList<TileState>> getTiles() {
 		return tiles;
 	}
-	
+
 	public void moveSnake() {
 		snake.move();
 		checkTiles();
 	}
-	
+
 	public void wakeSnake() {
 		snake.wakeUp();
 	}
@@ -140,14 +156,19 @@ public class GameBoard {
 		snakeSpeed = spd;
 	}
 	public void incSnakeSpeed(){
-		
+
 	}
 	public void decSnakeSpeed(){
-		
+
 	}
 	public long getSnake_speed(){
 		return snakeSpeed;
 	}
+
+	public boolean isPowered() {
+		return powered;
+	}
+
 	public int getScore() {
 		return score;
 	}
@@ -155,5 +176,5 @@ public class GameBoard {
 	private void incScore() {
 		score++;
 	}
-	
+
 }

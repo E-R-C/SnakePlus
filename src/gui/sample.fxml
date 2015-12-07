@@ -97,6 +97,7 @@
                         <Text layoutX="43.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" />
                         <Text layoutX="44.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level:" />
                         <Text fx:id="scoreText" layoutX="94.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <Text fx:id="levelText" layoutX="86.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="32.0" />
                      </children>
                   </AnchorPane>
                </right>
@@ -124,7 +125,7 @@
                         <Text fx:id="scoreText2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="521.6708984375" />
                         <HBox>
                            <children>
-                              <TextField prefHeight="31.0" prefWidth="522.0" promptText="Your Name" BorderPane.alignment="CENTER" />
+                              <TextField fx:id="nameEntry" prefHeight="31.0" prefWidth="522.0" promptText="Your Name" BorderPane.alignment="CENTER" />
                               <Button mnemonicParsing="false" onAction="#insertScore" text="Submit Score" />
                            </children>
                         </HBox>

@@ -9,7 +9,7 @@ public enum TileState {
 	FOOD,
 	BORDER, 
 	OBSTACLE,
-	GAME_OVER
+	POWER_UP, GAME_OVER
 }
 
 /* Maybe associate colors with each possible state in this class? */

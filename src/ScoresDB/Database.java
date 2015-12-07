@@ -24,6 +24,7 @@ public class Database {
     }
 
     public void populate_lists() throws SQLException {
+        scores.clear();
         openConnection();
         ResultSet rs = stat.executeQuery( "SELECT * FROM SCORES DESC;" );
         while(rs.next()){
@@ -32,8 +33,9 @@ public class Database {
         closeConnection();
     }
     public void add_score(String name, String score) throws SQLException{
-        String cmd = "INSERT INTO SCORES (Name, Score) VALUES (' " + name + "," + score + "');";
+        String cmd = "INSERT INTO SCORES (Name, Score) VALUES (' " + name + "','" + score + "');";
         execute(cmd);
+        populate_lists();
     }
     private void openConnection() throws SQLException {
         try {

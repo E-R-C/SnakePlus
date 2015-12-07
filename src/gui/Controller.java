@@ -64,6 +64,7 @@ public class Controller {
 	public void initialize() {
 		board = level.setNewBoard();
 		snake = board.getSnake();
+		hscores = new Database();
 		tabpane.getStyleClass().add("tabs");
 		
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
@@ -220,7 +221,7 @@ public class Controller {
 				scoreText.setText("" + board.getScore());
 				board.wakeSnake();
 
-				if (board.getScore() == 20 && !leveled) {
+				if (board.getScore() == 5 && !leveled) {
 					level = Level.LEVEL_2;
 					reset();
 					levelText.setText("2");
@@ -228,7 +229,7 @@ public class Controller {
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() == 40 && !leveled) {
+				else if (board.getScore() == 10 && !leveled) {
 					level = Level.LEVEL_3;
 					reset();
 					levelText.setText("3");
@@ -236,11 +237,11 @@ public class Controller {
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
-				else if (board.getScore() != 40 && board.getScore() != 20
-						&& board.getScore() != 60) {
+				else if (board.getScore() != 5 && board.getScore() != 10
+						&& board.getScore() != 15) {
 					leveled = false;
 				}
-				else if (board.getScore() == 60 && !leveled) {
+				else if (board.getScore() == 15 && !leveled) {
 					level = Level.LEVEL_4;
 					reset();
 					levelText.setText("4");
@@ -262,7 +263,6 @@ public class Controller {
 	};
 
 	public void populatehighscores(){
-		hscores = new Database();
 		try {
 			hscores.load_db();
 		} catch (SQLException e) {
@@ -282,6 +282,7 @@ public class Controller {
 	public void insertScore(){
 		try {
 			hscores.add_score(scoreText2.getText(), nameEntry.getText());
+			scoreTable.setItems(hscores.getScores());
 		} catch (SQLException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.show();
