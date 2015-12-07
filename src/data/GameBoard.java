@@ -8,11 +8,12 @@ import enums.TileState;
 
 public class GameBoard {
 	
-	private int width, height, snake_speed, score;
+	private int width, height, score;
+	private long snakeSpeed;
 	private Snake snake;
 	private Tuple foodTile = new Tuple(0, 0);
-	private Tuple breakablewall;
 	private ArrayList<Tuple> tempWallList = new ArrayList();
+	private boolean powered;
 	
 	private ObservableList<ObservableList<TileState>> tiles = FXCollections.observableArrayList();
 
@@ -21,6 +22,8 @@ public class GameBoard {
 		this.height = height;
 		this.width = width;
 		this.score = 0;
+		
+		snakeSpeed = 20L;
 		
 		checkTiles();
 	}
@@ -31,8 +34,25 @@ public class GameBoard {
 			if (i == 0 || i == width - 1 || j == 0 || j == height - 1
 					|| snake.getBody().contains(tuple)) {
 				tiles.get(i).add(TileState.GAME_OVER);
-			}else {
-				tiles.get(i).add(TileState.SNAKE_HEAD);
+			}
+			
+			else if (tempWallList.contains(tuple)) {
+				if (powered) {
+					tiles.get(i).add(TileState.SNAKE_HEAD);
+				}
+				else {
+					tiles.get(i).add(TileState.GAME_OVER);
+				}
+				
+			}
+			
+			else {
+				if (powered) {
+					tiles.get(i).add(TileState.POWERED_SNAKE_HEAD);
+				}
+				else {
+					tiles.get(i).add(TileState.SNAKE_HEAD);
+				}
 			}					
 			if (tuple.equals(foodTile)) {
 				snake.eat();
@@ -42,7 +62,12 @@ public class GameBoard {
 			if (i == 0 || i == width - 1 || j == 0 || j == height - 1) {
 				tiles.get(i).add(TileState.BORDER);
 			}else if (snake.getBody().contains(tuple)) {
-				tiles.get(i).add(TileState.SNAKE);
+				if (powered) {
+					tiles.get(i).add(TileState.POWERED_SNAKE);
+				}
+				else {
+					tiles.get(i).add(TileState.SNAKE);
+				}
 			}else if (tempWallList.contains(tuple)){
 				tiles.get(i).add(TileState.OBSTACLE);
 			}else if (tuple.equals(foodTile)) {
@@ -109,17 +134,17 @@ public class GameBoard {
 	public void setScore(int scr){
 		score = scr;
 	}
-	public void setSnakeSpeed(int spd){
-		snake_speed = spd;
+	public void setSnakeSpeed(long spd){
+		snakeSpeed = spd;
 	}
 	public void incSnakeSpeed(){
-		snake_speed++;
+		
 	}
 	public void decSnakeSpeed(){
-		snake_speed--;
+		
 	}
-	public int getSnake_speed(){
-		return snake_speed;
+	public long getSnake_speed(){
+		return snakeSpeed;
 	}
 	public int getScore() {
 		return score;
