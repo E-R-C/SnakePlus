@@ -111,10 +111,11 @@
                   <Button mnemonicParsing="false" onAction="#gotoGame" text="Back" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <TableView prefHeight="545.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="scoreTable" prefHeight="545.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="204.0" text="Name" />
-                      <TableColumn minWidth="0.0" prefWidth="333.0" text="Score" />
+                      <TableColumn fx:id="nameColumn" prefWidth="204.0" text="Name" />
+                      <TableColumn fx:id="scoreColumn" minWidth="0.0" prefWidth="333.0" text="Score" />
+                        <TableColumn fx:id="dateColumn" prefWidth="212.0" text="Date" />
                     </columns>
                   </TableView>
                </center>

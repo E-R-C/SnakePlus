@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -21,6 +23,7 @@ import javafx.scene.text.Text;
 
 import java.sql.SQLException;
 
+import data.Score;
 
 public class Controller {
 	
@@ -32,6 +35,16 @@ public class Controller {
 	
 	@FXML
 	private Text scoreText, scoreText2, levelText;
+	
+	@FXML
+	private TableView<Score> scoreTable;
+	
+	@FXML
+	private TableColumn<Score, String> nameColumn;
+	@FXML
+	private TableColumn<Score, String> scoreColumn;
+	@FXML
+	private TableColumn<Score, String>dateColumn;
 
 	@FXML
 	private TabPane tabpane;
@@ -57,6 +70,14 @@ public class Controller {
 		checkBoard();
 		board.createFood();
 		scoreText.setText("" + board.getScore());
+		
+		nameColumn.setCellValueFactory(
+				cellData -> cellData.getValue().getName());
+		scoreColumn.setCellValueFactory(
+				cellData -> cellData.getValue().getScore());
+		dateColumn.setCellValueFactory(
+				cellData -> cellData.getValue().getDate());
+		scoreTable.setItems(hscores.getScores());
 	}
 	
 	private void checkTileState(int i, int j){

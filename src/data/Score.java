@@ -7,23 +7,35 @@ import javafx.beans.property.StringProperty;
  * Created by Eric on 11/23/2015.
  */
 public class Score {
-    private String score, name, date;
+    private StringProperty score, name, date;
     public Score(String name, String score, String date){
-        this.score = score;
-        this.name = name;
-        this.date = name;
+        this.score = new SimpleStringProperty(score);
+        this.name = new SimpleStringProperty(name);
+        this.date = new SimpleStringProperty(name);
     }
 
     public StringProperty getDate() {
-        return new SimpleStringProperty(date);
+        return date;
     }
 
     public StringProperty getName() {
-        return new SimpleStringProperty(name);
+        return name;
     }
 
     public StringProperty getScore() {
-        return new SimpleStringProperty(score);
+        return score;
+    }
+    
+    public String getDateUnpacked() {
+    	return date.get();
+    }
+    
+    public String getNameUnpacked() {
+    	return name.get();
+    }
+    
+    public String getScoreUnpacked() {
+    	return score.get();
     }
 
 }
