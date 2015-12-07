@@ -10,18 +10,26 @@ import enums.TileState;
 import javafx.collections.ObservableList;
 
 public class Snake {
+	private int speed = 1;
 	private int size = 2;
 	private Tuple head = new Tuple(3, 3);
 	private ArrayDeque<Tuple> body = new ArrayDeque<Tuple>();
 	private Direction direction = Direction.DOWN;
 	private boolean eaten;
 	
-	public Snake() { 
+	public Snake(int spd) {
+		speed = spd;
 		for (int i = size - 1; i > 0; i--) {
 			body.add(new Tuple(head.getX(), head.getY() - i));
 		}
 	}
-	
+
+	public int getSpeed(){
+		return speed;
+	}
+	public void setSpeed(int input){
+		speed = input;
+	}
 	public Direction getDirection() {
 		return direction;
 	}
