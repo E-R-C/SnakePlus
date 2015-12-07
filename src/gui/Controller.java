@@ -44,7 +44,6 @@ public class Controller {
 	private boolean paused;
 	
 	public void initialize() {
-		gameOver = false;
 		snake = new Snake();
 		board = new GameBoard(snake, 20, 20);
 		tabpane.getStyleClass().add("tabs");
@@ -53,7 +52,7 @@ public class Controller {
 		
 		checkBoard();
 		board.createFood();
-		scoreText.setText(board.getScore());
+		scoreText.setText("" + board.getScore());
 	}
 	
 	private void checkTileState(int i, int j){
@@ -97,16 +96,16 @@ public class Controller {
 //			checkBoard();
 //		}
 		
-		if (code == KeyCode.UP) {
+		if (code == KeyCode.UP || code == KeyCode.W) {
 			goUp();
 		}
-		if (code == KeyCode.DOWN) {
+		if (code == KeyCode.DOWN || code == KeyCode.S) {
 			goDown();
 		}
-		if (code == KeyCode.LEFT) {
+		if (code == KeyCode.LEFT || code == KeyCode.A) {
 			goLeft();
 		}
-		if (code == KeyCode.RIGHT) {
+		if (code == KeyCode.RIGHT || code == KeyCode.D) {
 			goRight();
 		}
 		
@@ -170,7 +169,8 @@ public class Controller {
 				last = now;
 				board.moveSnake();
 				checkBoard();
-				scoreText.setText(board.getScore());
+				scoreText.setText("" + board.getScore());
+				board.wakeSnake();
 				if (gameOver){
 					// TODO alert the user, that htey died (dialog/alert) then go to high scores pane.
 					// There should be a delay between losing and seeing the score. You want hte user to see how they lost.

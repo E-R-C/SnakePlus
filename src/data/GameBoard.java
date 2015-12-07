@@ -7,10 +7,9 @@ import enums.TileState;
 
 public class GameBoard {
 	
-	private int width, height, snake_speed;
+	private int width, height, snake_speed, score;
 	private Snake snake;
 	private Tuple foodTile = new Tuple(0, 0);
-	private String score = "0";
 	
 	private ObservableList<ObservableList<TileState>> tiles = FXCollections.observableArrayList();
 	
@@ -18,7 +17,7 @@ public class GameBoard {
 		this.snake = snake;
 		this.height = height;
 		this.width = width;
-		snake_speed = snake.getSpeed();
+		this.score = 0;
 		
 		checkTiles();
 	}
@@ -87,6 +86,11 @@ public class GameBoard {
 		snake.move();
 		checkTiles();
 	}
+	
+	public void wakeSnake() {
+		snake.wakeUp();
+	}
+	
 	public void setSnakeSpeed(int spd){
 		snake_speed = spd;
 	}
@@ -99,18 +103,12 @@ public class GameBoard {
 	public int getSnake_speed(){
 		return snake_speed;
 	}
-	public String getScore() {
+	public int getScore() {
 		return score;
 	}
-	
-	//Couldn't we just make score at the beginning an int. It would make increasing
-	// it easier.  Then when you get score, you just have the code:
-	// return " " + score
-	// or something of that effect.
+
 	private void incScore() {
-		int score = Integer.parseInt(this.score);
 		score++;
-		this.score = Integer.toString(score);
 	}
 	
 }

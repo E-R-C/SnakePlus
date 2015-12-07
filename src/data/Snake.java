@@ -14,6 +14,7 @@ public class Snake {
 	private Tuple head = new Tuple(3, 3);
 	private ArrayDeque<Tuple> body = new ArrayDeque<Tuple>();
 	private Direction direction = Direction.DOWN;
+	private boolean resting;
 	private boolean eaten;
 	
 	public Snake() {
@@ -27,7 +28,10 @@ public class Snake {
 	}
 	
 	public void changeDirection(Direction dir) {
-		direction = dir;
+		if (!resting) {
+			direction = dir;
+			resting = true;
+		}
 	}
 	
 	public void move() {
@@ -51,7 +55,7 @@ public class Snake {
 		if (direction == Direction.RIGHT) {
 			head = new Tuple(head.getX() + 1, head.getY());
 		}
-
+		
 	}
 	
 	public Tuple getHead() {
@@ -60,6 +64,10 @@ public class Snake {
 	
 	public ArrayDeque<Tuple> getBody() {
 		return body;
+	}
+	
+	public void wakeUp() {
+		resting = false;
 	}
 	
 	public void eat() {
