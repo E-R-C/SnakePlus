@@ -1,13 +1,7 @@
 package data;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
-
-import javafx.collections.FXCollections;
 import enums.Direction;
-import enums.TileState;
-import javafx.collections.ObservableList;
 
 public class Snake {
 	private int size = 2;
