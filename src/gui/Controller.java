@@ -66,7 +66,9 @@ public class Controller {
 		}
 		if (currentTile == TileState.SNAKE ||
 				currentTile == TileState.SNAKE_HEAD) {
-			grid.add(new Rectangle(25, 25, Color.GREEN), i, j);
+			Rectangle temp = new Rectangle(25, 25, Color.GREEN);
+			temp.setStroke(Color.BLACK);
+			grid.add(temp, i, j);
 		}
 		if (currentTile == TileState.GAME_OVER) {
 			grid.add(new Rectangle(25, 25, Color.BROWN), i, j);
