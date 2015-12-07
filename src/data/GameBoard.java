@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,9 +11,11 @@ public class GameBoard {
 	private int width, height, snake_speed, score;
 	private Snake snake;
 	private Tuple foodTile = new Tuple(0, 0);
+	private Tuple breakablewall;
+	private ArrayList<Tuple> tempWallList = new ArrayList();
 	
 	private ObservableList<ObservableList<TileState>> tiles = FXCollections.observableArrayList();
-	
+
 	public GameBoard(Snake snake, int height, int width) {
 		this.snake = snake;
 		this.height = height;
@@ -40,6 +43,8 @@ public class GameBoard {
 				tiles.get(i).add(TileState.BORDER);
 			}else if (snake.getBody().contains(tuple)) {
 				tiles.get(i).add(TileState.SNAKE);
+			}else if (tempWallList.contains(tuple)){
+				tiles.get(i).add(TileState.OBSTACLE);
 			}else if (tuple.equals(foodTile)) {
 				tiles.get(i).add(TileState.FOOD);
 			}else {
@@ -60,16 +65,26 @@ public class GameBoard {
 			createFood();
 		}
 	}
-	
-	public void createFood() {
+
+	public boolean isValidSquare(int x, int y){
+		return tiles.get(x).get(y) == TileState.EMPTY;
+	}
+
+	private Tuple create(){
 		int x = randInt(1, height - 1);
 		int y = randInt(1, width - 1);
-	
-		while (tiles.get(x).get(y) != TileState.EMPTY) {
+
+		while (!isValidSquare(x,y)) {
 			x = randInt(1, height - 1);
 			y = randInt(1, width - 1);
 		}
-		foodTile = new Tuple(x, y);
+		return new Tuple(x,y);
+	}
+	public void createrRandomWall(){
+		tempWallList.add(create());
+	}
+	public void createFood() {
+		foodTile = create();
 	}
 	
 	private int randInt(int min, int max) {
@@ -90,7 +105,10 @@ public class GameBoard {
 	public void wakeSnake() {
 		snake.wakeUp();
 	}
-	
+
+	public void setScore(int scr){
+		score = scr;
+	}
 	public void setSnakeSpeed(int spd){
 		snake_speed = spd;
 	}
