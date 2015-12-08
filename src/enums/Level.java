@@ -4,7 +4,7 @@ import data.GameBoard;
 import data.Snake;
 
 public enum Level {
-	LEVEL_1 (15, 15, 20L, 0),
+	LEVEL_1 (10, 10, 20L, 0),
 	LEVEL_2 (15, 15, 22L, 5),
 	LEVEL_3 (12, 12, 25L, 10),
 	LEVEL_4 (20, 20, 30L, 15);
