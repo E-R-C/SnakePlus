@@ -263,12 +263,10 @@ public class Controller {
 				board.wakeSnake();
 
 				if (board.getScore() == 5 && !leveled) {
-					System.out.println(board.getSnake_speed());
 					level = Level.LEVEL_2;
 					reset();
 					levelText.setText("2");
 					leveled = true;
-					System.out.println(board.getSnake_speed());
 					MOVE_PER_SEC = board.getSnake_speed();
 					MOVE_INTERVAL = 5000000000L / MOVE_PER_SEC;
 				}
