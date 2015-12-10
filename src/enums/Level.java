@@ -26,7 +26,7 @@ public enum Level {
     public GameBoard setNewBoard(){
         snake = new Snake();
     	board = new GameBoard(snake, height, width);
-//    	board.setSnakeSpeed(speed);
+    	board.setSnakeSpeed(speed);
     	board.setScore(score);
     	return board;
     }
