@@ -312,6 +312,7 @@ public class Controller {
 
 	}
 	public void gotoHighscores(){
+		enter.setDisable(false);
 		populatehighscores();
 		tabpane.getSelectionModel().select(1);
 
@@ -322,8 +323,10 @@ public class Controller {
 	}
 	public void insertScore(){
 		try {
+			enter.setDisable(true);
 			hscores.add_score(scoreText2.getText(), nameEntry.getText());
 			scoreTable.setItems(hscores.getScores());
+			scoreText2.setText("");
 		} catch (SQLException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.show();
