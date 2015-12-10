@@ -15,7 +15,7 @@
    <children>
       <ImageView fx:id="loadscreen" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Snake%20Screen.png" />
+            <Image url="@Snake_Screen.png" />
          </image></ImageView>
       <TabPane fx:id="tabpane">
          <tabs>
