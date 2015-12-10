@@ -7,6 +7,7 @@ import enums.Direction;
 import enums.Level;
 import enums.TileState;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,20 +15,33 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.sql.SQLException;
 
 import data.Score;
+import javafx.util.Duration;
+
 
 public class Controller {
+
+	@FXML
+	private StackPane stack;
+
+	@FXML
+	private ImageView loadscreen;
 	@FXML 
-	private BorderPane canvas;
+	private BorderPane canvas,hscorepane;
 	
 	@FXML
 	private GridPane grid;
@@ -49,6 +63,11 @@ public class Controller {
 	private TabPane tabpane;
 	@FXML
 	private TextField nameEntry;
+	@FXML
+	private Button newGame,quit,back,enter;
+	@FXML
+	private Pane background;
+
 	private GameBoard board;
 	private Snake snake;
 	private Database hscores;
@@ -60,12 +79,19 @@ public class Controller {
 
 	private Level level = Level.LEVEL_1;
 
+
 	public void initialize() {
 		board = level.setNewBoard();
 		snake = board.getSnake();
 		hscores = new Database();
 		tabpane.getStyleClass().add("tabs");
-		
+		newGame.getStyleClass().add("btn");
+		canvas.getStyleClass().add("canvas");
+		hscorepane.getStyleClass().add("canvas");
+		grid.getStyleClass().add("grid");
+		quit.getStyleClass().add("btn");
+		back.getStyleClass().add("btn");
+		enter.getStyleClass().add("btn");
 		canvas.setOnKeyPressed(k -> handlePress(k.getCode()));
 		
 		checkBoard();
@@ -81,8 +107,20 @@ public class Controller {
 //		dateColumn.setCellValueFactory(
 //				cellData -> cellData.getValue().getDate());
 		scoreTable.setItems(hscores.getScores());
-	}
+		loading();
 
+	}
+	private void loading(){
+		Font.loadFont(getClass().getResourceAsStream("/gui/BMblock.ttf"),14);
+		FadeTransition fadeOut = new FadeTransition(Duration.millis(6000));
+		fadeOut.setNode(tabpane);
+		fadeOut.setFromValue(0.0);
+		fadeOut.setToValue(1.0);
+		fadeOut.setCycleCount(1);
+		fadeOut.setAutoReverse(false);
+		fadeOut.playFromStart();
+
+	}
 	public void newGame(){
 		board.setScore(0);
 		reset();
