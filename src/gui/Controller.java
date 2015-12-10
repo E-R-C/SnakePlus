@@ -153,17 +153,20 @@ public class Controller {
 
 		if (currentTile == TileState.GAME_OVER) {
 			grid.add(new Rectangle(25, 25, Color.MAROON), i, j);
-			pause();
-			Alert gameover = new Alert(Alert.AlertType.CONFIRMATION, "Game Over");
-			gameover.show();
-			scoreText2.setText(scoreText.getText());
-			gotoHighscores();
+			endgame();
+
 		}
 		if (currentTile == TileState.FOOD) {
 			grid.add(new Rectangle(25, 25, Color.RED), i, j);
 		}
 	}
-	
+	public void endgame(){
+		pause();
+		Alert gameover = new Alert(Alert.AlertType.INFORMATION, "Game Over");
+		gameover.show();
+		scoreText2.setText(scoreText.getText());
+		gotoHighscores();
+	}
 	private void checkBoard() {
 		grid.requestFocus();
 		grid.getChildren().clear();

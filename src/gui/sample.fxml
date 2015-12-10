@@ -73,7 +73,7 @@
                      <bottom>
                         <AnchorPane prefHeight="75.0" prefWidth="750.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="quit" layoutY="31.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Quit Game" />
+                              <Button fx:id="quit" layoutY="31.0" mnemonicParsing="false" onAction="#endgame" prefHeight="30.0" prefWidth="150.0" text="Quit Game" />
 
                               <Button fx:id="newGame" layoutX="300.0" layoutY="31.0" mnemonicParsing="false" onAction="#newGame" prefHeight="30.0" prefWidth="150.0" text="New Game">
                                  <font>
