@@ -111,7 +111,6 @@ public class Controller {
 
 	}
 	private void loading(){
-		Font.loadFont(getClass().getResourceAsStream("/gui/BMblock.ttf"),14);
 		FadeTransition fadeOut = new FadeTransition(Duration.millis(6000));
 		fadeOut.setNode(tabpane);
 		fadeOut.setFromValue(0.0);

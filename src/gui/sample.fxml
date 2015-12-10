@@ -77,7 +77,7 @@
 
                               <Button fx:id="newGame" layoutX="300.0" layoutY="31.0" mnemonicParsing="false" onAction="#newGame" prefHeight="30.0" prefWidth="150.0" text="New Game">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Button>
                            </children>
                         </AnchorPane>
@@ -93,45 +93,45 @@
                                  <children>
                                     <Text layoutX="18.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Controls" underline="true">
                                        <font>
-                                          <Font name="BM block A15" size="24.0" />
+                                          <Font name="BM block" size="24.0" />
                                        </font>
                                     </Text>
                                     <Text layoutX="22.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrow Keys:" wrappingWidth="129.26318359375">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                     <Text layoutX="3.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Direction">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" />
                                     <Text layoutX="32.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P: Pause">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" />
                                     <Text layoutX="29.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="W/A/S/D:">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                     <Text layoutX="3.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Direction">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" />
                                     <Text layoutX="37.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Escape:">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                     <Text layoutX="28.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Game">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font>
                                     </Text>
                                  </children>
@@ -152,19 +152,19 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="45.0" layoutX="17.0" layoutY="166.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="93.0" />
                               <Text layoutX="21.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Text>
                               <Text layoutX="21.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level:">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Text>
                               <Text fx:id="scoreText" fill="RED" layoutX="94.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Text>
                               <Text fx:id="levelText" fill="RED" layoutX="95.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="32.0">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Text>
                            </children>
                         </AnchorPane>
@@ -178,7 +178,7 @@
                      <top>
                         <Button fx:id="back" mnemonicParsing="false" onAction="#gotoGame" text="Back" BorderPane.alignment="CENTER">
                            <font>
-                              <Font name="BM block A15" size="15.0" />
+                              <Font name="BM block" size="15.0" />
                            </font></Button>
                      </top>
                      <center>
@@ -195,17 +195,17 @@
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your Score: " textAlignment="CENTER" wrappingWidth="521.6708984375">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Text>
                               <Text fx:id="scoreText2" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="521.6708984375">
                                  <font>
-                                    <Font name="BM block A15" size="15.0" />
+                                    <Font name="BM block" size="15.0" />
                                  </font></Text>
                               <HBox>
                                  <children>
                                     <TextField fx:id="nameEntry" prefHeight="31.0" prefWidth="522.0" promptText="Your Name" BorderPane.alignment="CENTER">
                                        <font>
-                                          <Font name="BM block A15" size="15.0" />
+                                          <Font name="BM block" size="15.0" />
                                        </font></TextField>
                                     <Button fx:id="enter" mnemonicParsing="false" onAction="#insertScore" text="Submit Score" />
                                  </children>
