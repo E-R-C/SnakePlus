@@ -28,7 +28,7 @@ public class Database {
         openConnection();
         ResultSet rs = stat.executeQuery( "SELECT * FROM SCORES DESC;" );
         while(rs.next()){
-            scores.add(new Score(rs.getString("Name"), rs.getString("Score"), rs.getString("Date")));
+            scores.add(new Score(rs.getString("Name"), rs.getString("Score")));
         }
         closeConnection();
     }

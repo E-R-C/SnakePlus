@@ -8,15 +8,11 @@ import javafx.beans.property.StringProperty;
  */
 public class Score {
     private StringProperty score, name, date;
-    public Score(String score, String name, String date){
+    public Score(String score, String name){
         this.score = new SimpleStringProperty(score);
         this.name = new SimpleStringProperty(name);
-        this.date = new SimpleStringProperty(name);
     }
 
-    public StringProperty getDate() {
-        return date;
-    }
 
     public StringProperty getName() {
         return name;
@@ -25,17 +21,6 @@ public class Score {
     public StringProperty getScore() {
         return score;
     }
-    
-    public String getDateUnpacked() {
-    	return date.get();
-    }
-    
-    public String getNameUnpacked() {
-    	return name.get();
-    }
-    
-    public String getScoreUnpacked() {
-    	return score.get();
-    }
+
 
 }
